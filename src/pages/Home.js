@@ -67,7 +67,7 @@ const Home = () => {
             {/* Call to Action Buttons */}
             <div className="pt-6 flex flex-wrap justify-center md:justify-start gap-4">
               <a
-                href="#contact"
+                href="/contact"
                 className="inline-block px-6 py-3 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 shadow-md transition-all"
               >
                 Contact Us
