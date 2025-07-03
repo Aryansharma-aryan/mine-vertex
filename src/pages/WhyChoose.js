@@ -30,24 +30,10 @@ const flipIn = {
 
 export default function WhyChooseVertex() {
   return (
-    <section
-      className="relative py-20 px-6 md:px-20 text-white overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #1a1c2b, #3e2f20, #8a4d1f)",
-        backgroundSize: "300% 300%",
-        animation: "bgShift 15s ease-in-out infinite",
-      }}
-    >
-      {/* Animate Gradient Background */}
-      <style>
-        {`
-          @keyframes bgShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-        `}
-      </style>
+    <section className="relative py-20 px-6 md:px-20 text-white overflow-hidden bg-gradient-to-br from-[#101b2d] via-[#0f172a] to-[#1c1e29]">
+      {/* Blurred glow blobs */}
+      <div className="absolute -top-10 -left-10 w-72 h-72 bg-orange-500 opacity-20 blur-[120px] rounded-full z-0" />
+      <div className="absolute -bottom-20 -right-10 w-80 h-80 bg-blue-500 opacity-20 blur-[100px] rounded-full z-0" />
 
       <motion.div
         initial="hidden"
@@ -62,7 +48,8 @@ export default function WhyChooseVertex() {
             variants={fadeInUp}
             custom={1}
           >
-            Why Choose <span className="text-orange-400">Vertex Study Overseas?</span>
+            Why Choose{" "}
+            <span className="text-orange-400">Vertex Study Overseas?</span>
           </motion.h2>
 
           <motion.p

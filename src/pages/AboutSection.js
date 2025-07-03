@@ -8,51 +8,53 @@ import {
   FaGlobe,
 } from "react-icons/fa";
 
-// Premium Stat Card Component
+// Single Stat Card with premium font + shadows
 const StatCard = ({ icon: Icon, end, suffix, label }) => (
   <motion.div
-    whileHover={{ scale: 1.05 }}
-    className="w-full h-44 p-6 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md shadow-2xl text-white flex flex-col items-center justify-center transition-all duration-300"
+    whileHover={{ scale: 1.07, rotate: 1 }}
+    className="w-full h-44 p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 backdrop-blur-xl shadow-[0_15px_30px_rgba(0,0,0,0.2)] text-white flex flex-col items-center justify-center transition-all duration-300"
   >
-    <Icon className="text-4xl mb-2 text-orange-400 drop-shadow-md" />
-    <h4 className="text-3xl font-bold tracking-wide">
+    <div className="bg-white/20 p-4 rounded-full mb-3 shadow-inner shadow-white/10">
+      <Icon className="text-4xl text-yellow-400 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" />
+    </div>
+    <h4 className="text-3xl font-extrabold tracking-wide font-[Poppins] drop-shadow-md">
       <CountUp end={end} duration={2.5} />{suffix}
     </h4>
-    <p className="text-center text-sm mt-1">{label}</p>
+    <p className="text-center text-sm mt-1 font-medium font-[Poppins] opacity-90">
+      {label}
+    </p>
   </motion.div>
 );
 
+// Main About Section
 export default function AboutSection() {
   return (
-    <section className="relative overflow-hidden py-20 px-4 sm:px-8 md:px-16 text-white">
-      {/* Animated Gradient Background */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#0a1f3c] via-[#132c45] to-[#ff7a00] animate-gradientMove"></div>
-      <div className="absolute inset-0 z-0 bg-white/5 backdrop-blur-md"></div>
+    <section className="bg-gradient-to-br from-orange-500 to-orange-600 py-20 px-4 sm:px-8 md:px-16 text-white font-[Poppins] relative overflow-hidden">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-10 max-w-7xl mx-auto">
 
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 max-w-7xl mx-auto">
-        {/* LEFT: About Text Content */}
+        {/* LEFT Content */}
         <motion.div
           initial={{ x: -100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="bg-white/10 text-white p-8 sm:p-10 rounded-3xl shadow-xl border border-white/20 backdrop-blur-lg w-full md:w-1/2"
+          className="bg-white text-black p-8 sm:p-10 rounded-3xl shadow-2xl w-full md:w-1/2"
         >
-          <h3 className="text-lg sm:text-xl font-semibold mb-2 text-orange-400 uppercase">
+          <h3 className="text-lg sm:text-xl font-semibold mb-2 text-orange-600 uppercase tracking-wider">
             About Us
           </h3>
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6 leading-snug">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 leading-snug text-[#0a1f3c] font-[Poppins] drop-shadow-[0_3px_5px_rgba(0,0,0,0.3)]">
             Your Global Education Partner – Vertex Study Visa KKR
           </h2>
-          <p className="text-base md:text-lg text-white/80 mb-8 leading-relaxed">
+          <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed font-[Poppins]">
             At Vertex Study Visa KKR, we are passionate about helping students and professionals achieve their global ambitions. With years of experience and a highly qualified team, we provide personalized visa consultation, documentation support, and language training. We believe in transparent service, ethical guidance, and long-term success for our clients.
           </p>
-          <button className="bg-[#ff7a00] text-white px-6 py-3 rounded-xl hover:bg-orange-600 transition-all duration-300 shadow-lg">
+          <button className="bg-[#0a1f3c] text-white px-6 py-3 rounded-xl hover:bg-[#132b47] transition-all duration-300 shadow-lg font-[Poppins]">
             START YOUR VISA JOURNEY TODAY
           </button>
         </motion.div>
 
-        {/* RIGHT: Animated Stats */}
+        {/* RIGHT Stat Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full md:w-1/2">
           <StatCard
             icon={FaPlaneDeparture}
@@ -80,19 +82,6 @@ export default function AboutSection() {
           />
         </div>
       </div>
-
-      {/* Gradient Animation Keyframes */}
-      <style>{`
-        .animate-gradientMove {
-          background-size: 400% 400%;
-          animation: gradientBG 15s ease infinite;
-        }
-        @keyframes gradientBG {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-      `}</style>
     </section>
   );
 }

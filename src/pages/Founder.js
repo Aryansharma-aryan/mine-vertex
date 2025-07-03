@@ -3,10 +3,10 @@ import founderImage from "../assets/gurbaaz.png";
 
 const FounderSection = () => {
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-br from-[#0a0f24] via-[#101626] to-[#0a0f24] overflow-hidden">
-      {/* Decorative glowing blobs */}
-      <div className="absolute -top-10 -left-10 w-72 h-72 bg-yellow-400 opacity-20 blur-3xl rounded-full z-0" />
-      <div className="absolute -bottom-20 right-0 w-80 h-80 bg-pink-500 opacity-10 blur-3xl rounded-full z-0" />
+    <section className="relative py-24 px-6 bg-gradient-to-br from-[#101b2d] via-[#0f172a] to-[#1c1e29] overflow-hidden">
+      {/* Glowing Background Blobs */}
+      <div className="absolute -top-10 -left-10 w-72 h-72 bg-orange-500 opacity-20 blur-[120px] rounded-full z-0" />
+      <div className="absolute -bottom-20 -right-10 w-80 h-80 bg-blue-500 opacity-20 blur-[100px] rounded-full z-0" />
 
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
         {/* Founder Card */}
@@ -30,7 +30,7 @@ const FounderSection = () => {
           </p>
         </div>
 
-        {/* Right Side - Quote or Background Element */}
+        {/* Right Side - Title & CTA */}
         <div className="text-white text-center md:text-left">
           <h3 className="text-4xl sm:text-5xl font-extrabold mb-4 bg-gradient-to-r from-yellow-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent animate-gradient-x">
             👨‍🎓 Driven by Purpose.
