@@ -8,155 +8,91 @@ import {
   FaGlobe,
 } from "react-icons/fa";
 
-// Animation Variants
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { rotateY: -90, opacity: 0 },
-  visible: {
-    rotateY: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut",
-    },
-  },
-};
-
-const iconVariants = {
-  hidden: { scale: 0 },
-  visible: {
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 500,
-      damping: 20,
-    },
-  },
-};
+// Premium Stat Card Component
+const StatCard = ({ icon: Icon, end, suffix, label }) => (
+  <motion.div
+    whileHover={{ scale: 1.05 }}
+    className="w-full h-44 p-6 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md shadow-2xl text-white flex flex-col items-center justify-center transition-all duration-300"
+  >
+    <Icon className="text-4xl mb-2 text-orange-400 drop-shadow-md" />
+    <h4 className="text-3xl font-bold tracking-wide">
+      <CountUp end={end} duration={2.5} />{suffix}
+    </h4>
+    <p className="text-center text-sm mt-1">{label}</p>
+  </motion.div>
+);
 
 export default function AboutSection() {
   return (
-    <section className="bg-gradient-to-br from-orange-500 to-orange-600 py-20 px-4 sm:px-8 md:px-16 text-white relative overflow-hidden">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-10 max-w-7xl mx-auto">
-        
-        {/* Left Content */}
+    <section className="relative overflow-hidden py-20 px-4 sm:px-8 md:px-16 text-white">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#0a1f3c] via-[#132c45] to-[#ff7a00] animate-gradientMove"></div>
+      <div className="absolute inset-0 z-0 bg-white/5 backdrop-blur-md"></div>
+
+      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 max-w-7xl mx-auto">
+        {/* LEFT: About Text Content */}
         <motion.div
           initial={{ x: -100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="bg-white text-black p-8 sm:p-10 rounded-3xl shadow-2xl w-full md:w-1/2"
+          className="bg-white/10 text-white p-8 sm:p-10 rounded-3xl shadow-xl border border-white/20 backdrop-blur-lg w-full md:w-1/2"
         >
-          <motion.h3
-            className="text-lg sm:text-xl font-semibold mb-2 text-orange-600 uppercase"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-          >
+          <h3 className="text-lg sm:text-xl font-semibold mb-2 text-orange-400 uppercase">
             About Us
-          </motion.h3>
-          <motion.h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-          >
-            Empowering Global Dreams – Vertex Study Overseas
-          </motion.h2>
-          <motion.p
-            className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
-          >
-            Vertex Study Overseas is dedicated to transforming your dreams into global achievements. With 8+ years of hands-on experience, our team has guided thousands through the study visa journey. Whether you're applying for a student, tourist, or permanent visa, we offer personalized assistance with 100% transparency and support. We collaborate with 50+ renowned institutions worldwide.
-          </motion.p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-[#0a1f3c] text-white px-6 py-3 rounded-xl hover:bg-[#132b47] transition-all duration-300 shadow-lg"
-          >
+          </h3>
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 leading-snug">
+            Your Global Education Partner – Vertex Study Visa KKR
+          </h2>
+          <p className="text-base md:text-lg text-white/80 mb-8 leading-relaxed">
+            At Vertex Study Visa KKR, we are passionate about helping students and professionals achieve their global ambitions. With years of experience and a highly qualified team, we provide personalized visa consultation, documentation support, and language training. We believe in transparent service, ethical guidance, and long-term success for our clients.
+          </p>
+          <button className="bg-[#ff7a00] text-white px-6 py-3 rounded-xl hover:bg-orange-600 transition-all duration-300 shadow-lg">
             START YOUR VISA JOURNEY TODAY
-          </motion.button>
+          </button>
         </motion.div>
 
-        {/* Stats Section */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full md:w-1/2"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {/* Card 1 */}
-          <motion.div
-            variants={cardVariants}
-            whileHover={{ scale: 1.05, rotateZ: 1 }}
-            className="bg-white text-[#0a1f3c] p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center transform-gpu transition duration-300"
-          >
-            <motion.div variants={iconVariants}>
-              <FaPlaneDeparture className="text-4xl mb-3 text-orange-500" />
-            </motion.div>
-            <h4 className="text-3xl font-bold">
-              <CountUp end={1200} duration={2} separator="," />+
-            </h4>
-            <p className="text-center text-sm mt-1">Global Study Visas Approved</p>
-          </motion.div>
-
-          {/* Card 2 */}
-          <motion.div
-            variants={cardVariants}
-            whileHover={{ scale: 1.05, rotateZ: 1 }}
-            className="bg-white text-[#0a1f3c] p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center transform-gpu transition duration-300"
-          >
-            <motion.div variants={iconVariants}>
-              <FaGlobe className="text-4xl mb-3 text-orange-500" />
-            </motion.div>
-            <h4 className="text-3xl font-bold">
-              <CountUp end={10} duration={2} />+
-            </h4>
-            <p className="text-center text-sm mt-1">Years of Industry Experience</p>
-          </motion.div>
-
-          {/* Card 3 */}
-          <motion.div
-            variants={cardVariants}
-            whileHover={{ scale: 1.05, rotateZ: 1 }}
-            className="bg-white text-[#0a1f3c] p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center transform-gpu transition duration-300"
-          >
-            <motion.div variants={iconVariants}>
-              <FaUserGraduate className="text-4xl mb-3 text-orange-500" />
-            </motion.div>
-            <h4 className="text-3xl font-bold">
-              <CountUp end={1800} duration={2} separator="," />+
-            </h4>
-            <p className="text-center text-sm mt-1">Tourist & Visitor Visas Delivered</p>
-          </motion.div>
-
-          {/* Card 4 */}
-          <motion.div
-            variants={cardVariants}
-            whileHover={{ scale: 1.05, rotateZ: 1 }}
-            className="bg-white text-[#0a1f3c] p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center transform-gpu transition duration-300"
-          >
-            <motion.div variants={iconVariants}>
-              <FaUniversity className="text-4xl mb-3 text-orange-500" />
-            </motion.div>
-            <h4 className="text-3xl font-bold">
-              <CountUp end={60} duration={2} />+
-            </h4>
-            <p className="text-center text-sm mt-1">Partner Universities Worldwide</p>
-          </motion.div>
-        </motion.div>
+        {/* RIGHT: Animated Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full md:w-1/2">
+          <StatCard
+            icon={FaPlaneDeparture}
+            end={750}
+            suffix="+"
+            label="Study Visas Approved Globally"
+          />
+          <StatCard
+            icon={FaGlobe}
+            end={8}
+            suffix="+"
+            label="Years of Expertise in Visa Consultation"
+          />
+          <StatCard
+            icon={FaUserGraduate}
+            end={1000}
+            suffix="+"
+            label="Successful Tourist & Visitor Visa Cases"
+          />
+          <StatCard
+            icon={FaUniversity}
+            end={50}
+            suffix="+"
+            label="Partnered Colleges & Universities Worldwide"
+          />
+        </div>
       </div>
+
+      {/* Gradient Animation Keyframes */}
+      <style>{`
+        .animate-gradientMove {
+          background-size: 400% 400%;
+          animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `}</style>
     </section>
   );
 }

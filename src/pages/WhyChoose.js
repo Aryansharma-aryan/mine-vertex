@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaCheckCircle } from "react-icons/fa";
-import whyImage from "../assets/banner.png"; // Ensure this path is correct
+import whyImage from "../assets/banner.png"; // keep the image same
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -16,7 +16,6 @@ const fadeInUp = {
   }),
 };
 
-// Flip animation variant for the image
 const flipIn = {
   hidden: { rotateY: -90, opacity: 0 },
   visible: {
@@ -33,8 +32,23 @@ export default function WhyChooseVertex() {
   return (
     <section
       className="relative py-20 px-6 md:px-20 text-white overflow-hidden"
-      style={{ background: "linear-gradient(to right, #0a1f3c, #1a2a4f)" }}
+      style={{
+        background: "linear-gradient(135deg, #1a1c2b, #3e2f20, #8a4d1f)",
+        backgroundSize: "300% 300%",
+        animation: "bgShift 15s ease-in-out infinite",
+      }}
     >
+      {/* Animate Gradient Background */}
+      <style>
+        {`
+          @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+        `}
+      </style>
+
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -90,7 +104,7 @@ export default function WhyChooseVertex() {
 
         {/* Right: Image with flip effect */}
         <motion.div
-          className="flex-1 relative group rounded-2xl overflow-hidden shadow-xl"
+          className="flex-1 relative group rounded-2xl overflow-hidden shadow-2xl"
           variants={flipIn}
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent z-10" />
@@ -102,10 +116,6 @@ export default function WhyChooseVertex() {
           <div className="absolute -inset-1 rounded-2xl border border-yellow-400/20 blur-md opacity-30 group-hover:opacity-60 transition duration-700" />
         </motion.div>
       </motion.div>
-
-      {/* Background decorations */}
-      <div className="absolute top-10 left-10 w-40 h-40 bg-pink-400/20 rounded-full blur-3xl z-0" />
-      <div className="absolute bottom-10 right-10 w-56 h-56 bg-yellow-400/20 rounded-full blur-3xl z-0" />
     </section>
   );
 }
