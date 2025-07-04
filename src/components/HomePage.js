@@ -77,20 +77,22 @@ export default function HomePage() {
           {/* Top Contact Bar */}
           <div className="flex flex-wrap items-center justify-between px-4 sm:px-6 py-2 border-b border-gray-700 text-base font-medium">
             <div className="flex gap-4 flex-wrap items-center text-white/90 text-sm sm:text-base drop-shadow-md">
-       <span className="transition font-semibold text-white">
-  📞 <strong className="text-orange-500">Phone:</strong>{" "}
+<span className="transition font-semibold text-white flex items-center gap-2">
+  📞 <strong className="text-[#00c97d]">Phone:</strong>{" "}
   <a
     href="tel:+918053555546"
-    className="text-yellow-300 hover:text-white font-bold shadow-[0_0_8px_rgba(255,193,7,0.7)] transition duration-200"
+    className="text-[#ffd3a3] hover:text-white font-bold transition duration-200 relative"
   >
-    8053555546
+    <span className="drop-shadow-[0_0_6px_rgba(255,211,163,0.6)]">8053555546</span>
+    <span className="absolute inset-x-0 -bottom-0.5 h-[2px] w-0 bg-gradient-to-r from-[#00c97d] via-[#ffd3a3] to-[#ffba84] transition-all duration-300 group-hover:w-full rounded-full"></span>
   </a>
-  <span className="mx-2 text-orange-400 font-bold">|</span>
+  <span className="mx-2 text-[#00c97d] font-bold">|</span>
   <a
     href="tel:+919996140555"
-    className="text-yellow-300 hover:text-white font-bold shadow-[0_0_8px_rgba(255,193,7,0.7)] transition duration-200"
+    className="text-[#ffd3a3] hover:text-white font-bold transition duration-200 relative"
   >
-    9996140555
+    <span className="drop-shadow-[0_0_6px_rgba(255,211,163,0.6)]">9996140555</span>
+    <span className="absolute inset-x-0 -bottom-0.5 h-[2px] w-0 bg-gradient-to-r from-[#00c97d] via-[#ffd3a3] to-[#ffba84] transition-all duration-300 group-hover:w-full rounded-full"></span>
   </a>
 </span>
 
@@ -106,20 +108,31 @@ export default function HomePage() {
 </span>
 
             </div>
-            <div className="flex gap-4 text-orange-500 text-xl">
-              {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn].map(
-                (Icon, index) => (
-                  <motion.div
-                    key={index}
-                    whileHover={{ scale: 1.3 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="hover:text-white transition"
-                  >
-                    <Icon className="cursor-pointer" />
-                  </motion.div>
-                )
-              )}
-            </div>
+           <div className="flex gap-4 text-xl">
+  {[
+    { Icon: FaFacebookF, color: "#1877F2", glow: "rgba(24, 119, 242, 0.5)" },
+    { Icon: FaTwitter, color: "#1DA1F2", glow: "rgba(29, 161, 242, 0.5)" },
+    { Icon: FaInstagram, color: "#E1306C", glow: "rgba(225, 48, 108, 0.5)" },
+    { Icon: FaLinkedinIn, color: "#0077B5", glow: "rgba(0, 119, 181, 0.5)" },
+  ].map(({ Icon, color, glow }, index) => (
+    <motion.div
+      key={index}
+      whileHover={{ scale: 1.25 }}
+      whileTap={{ scale: 0.95 }}
+      className="transition duration-300"
+      style={{
+        color,
+        textShadow: `
+          0 0 6px ${glow},
+          0 0 12px ${glow},
+          0 0 20px rgba(0,0,0,0.3)`,
+      }}
+    >
+      <Icon className="cursor-pointer" />
+    </motion.div>
+  ))}
+</div>
+
           </div>
 
           {/* Navbar Header */}
@@ -138,9 +151,8 @@ export default function HomePage() {
               transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
               whileHover={{ scale: 1.05 }}
             />
-
-           <motion.nav
-  className="hidden md:flex gap-6 lg:gap-10 text-base lg:text-lg font-semibold tracking-wide"
+<motion.nav
+  className="hidden md:flex gap-6 lg:gap-10 text-base lg:text-lg font-bold tracking-wide"
   initial="hidden"
   animate="visible"
   variants={{
@@ -166,21 +178,18 @@ export default function HomePage() {
     >
       <Link
         to={path}
-        className="relative group px-2 py-1 text-[#e2ecfa] transition duration-300 hover:scale-105"
+        className="relative px-3 py-1 group transition duration-300 hover:scale-[1.05]"
       >
-        {/* Text shimmer */}
-        <span className="relative z-10 group-hover:text-transparent bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#ff9d3f] group-hover:via-[#ffce5a] group-hover:to-[#ff8b3d] transition-all duration-300">
+        {/* Gradient Text (Always On) */}
+        <span className="bg-gradient-to-r from-[#1dd1a1] via-[#ffeaa7] to-[#f8a5c2] bg-clip-text text-transparent font-bold relative z-10">
           {label}
         </span>
 
-        {/* Underline animation */}
-        <span className="absolute left-1/2 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-[#ff7a00] via-[#ffc933] to-[#ff5e00] rounded transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+        {/* Gradient Underline on Hover */}
+        <span className="absolute left-1/2 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-[#00b894] via-[#fcd581] to-[#f78fb3] rounded-full transition-all duration-500 group-hover:w-full group-hover:left-0" />
 
-        {/* Glow blur hover */}
-        <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-orange-500/20 via-yellow-400/20 to-pink-400/10 blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none" />
-
-        {/* Border shimmer (optional) */}
-        <span className="absolute -inset-0.5 rounded-lg border border-transparent group-hover:border-orange-300/30 transition-all duration-300 pointer-events-none" />
+        {/* Soft Glow (Subtle Always) */}
+        <span className="absolute inset-0 rounded-md bg-gradient-to-r from-emerald-300/10 via-amber-200/10 to-pink-300/10 blur-md opacity-80 transition duration-500 pointer-events-none" />
       </Link>
     </motion.div>
   ))}
@@ -211,7 +220,7 @@ export default function HomePage() {
           </motion.header>
 
           {/* Mobile Sidebar */}
-          <AnimatePresence>
+<AnimatePresence>
   {isSidebarOpen && (
     <motion.aside
       initial={{ x: "100%", opacity: 0 }}
@@ -228,7 +237,7 @@ export default function HomePage() {
         />
       </div>
 
-      {/* Nav Links */}
+      {/* Nav Links (Same style as top navbar) */}
       {[
         { path: "/", label: "Home" },
         { path: "/services", label: "Services" },
@@ -242,22 +251,29 @@ export default function HomePage() {
           key={i}
           to={path}
           onClick={toggleSidebar}
-          className="text-[15px] font-semibold text-gray-200 hover:text-orange-400 transition-all tracking-wide relative group"
+          className="relative px-2 py-1 group transition duration-300 hover:scale-[1.05]"
         >
-          <span className="relative z-10">{label}</span>
-          <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-gradient-to-r from-orange-400 to-yellow-400 group-hover:w-full transition-all duration-300 rounded" />
+          {/* Premium Gradient Text Always On */}
+          <span className="bg-gradient-to-r from-[#1dd1a1] via-[#ffeaa7] to-[#f8a5c2] bg-clip-text text-transparent font-bold tracking-wide relative z-10">
+            {label}
+          </span>
+
+          {/* Gradient Underline on Hover */}
+          <span className="absolute left-1/2 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-[#00b894] via-[#fcd581] to-[#f78fb3] rounded-full transition-all duration-500 group-hover:w-full group-hover:left-0" />
+
+          {/* Subtle Glow Background Blur */}
+          <span className="absolute inset-0 rounded-md bg-gradient-to-r from-emerald-300/10 via-amber-200/10 to-pink-300/10 blur-md opacity-80 transition duration-500 pointer-events-none" />
         </Link>
       ))}
 
-      {/* Get A Quote Button */}
+      {/* Get A Quote Button (Optional Keep/Style separately) */}
       <Link to="/quote" onClick={toggleSidebar}>
         <button className="relative mt-6 px-6 py-3 text-white font-semibold text-sm rounded-xl 
           bg-gradient-to-br from-[#2c0f00] via-[#ff6b00] to-[#ff944d] 
           shadow-[0_0_25px_rgba(255,130,40,0.5),_0_0_50px_rgba(255,120,0,0.35)] 
-          border border-orange-100/10 ring-1 ring-orange-500/30 
           backdrop-blur-md overflow-hidden transition-all duration-300 transform hover:-translate-y-1 
-          hover:shadow-[0_0_40px_rgba(255,140,40,0.7),_0_0_80px_rgba(255,100,0,0.4)]">
-          
+          hover:shadow-[0_0_40px_rgba(255,140,40,0.7),_0_0_80px_rgba(255,100,0,0.4)]"
+        >
           {/* Glow Layer */}
           <span className="absolute inset-0 bg-gradient-to-br from-[#ff6a00]/20 via-[#ff8800]/20 to-[#ff5e00]/20 
             blur-2xl opacity-50 rounded-xl pointer-events-none z-0" />
@@ -266,7 +282,7 @@ export default function HomePage() {
           <span className="absolute top-0 left-0 w-full h-full rounded-xl bg-white/10 opacity-10 
             pointer-events-none z-0" />
 
-          {/* Text */}
+          {/* Gradient Text */}
           <span className="relative z-10 tracking-wide bg-gradient-to-r from-[#fff] via-[#ffe6d4] to-[#fff2e0] bg-clip-text text-transparent">
             Get A Quote
           </span>
@@ -275,6 +291,7 @@ export default function HomePage() {
     </motion.aside>
   )}
 </AnimatePresence>
+
 
           {/* Hero Content */}
           <motion.section
@@ -295,11 +312,11 @@ export default function HomePage() {
               </span>
             </motion.h2>
 
-          <motion.h1
-  className="text-[32px] sm:text-[48px] md:text-[64px] leading-tight font-extrabold mb-6 tracking-tight 
-    text-transparent bg-clip-text 
+      <motion.h1
+  className="text-[32px] sm:text-[44px] md:text-[64px] lg:text-[80px] xl:text-[96px] 
+    leading-tight font-extrabold mb-6 tracking-tight text-transparent bg-clip-text 
     bg-gradient-to-r from-orange-400 via-yellow-300 to-pink-500 
-    drop-shadow-[0_1px_1px_rgba(255,130,0,0.6)]"
+    drop-shadow-[0_1px_1px_rgba(255,130,0,0.6)] whitespace-nowrap overflow-hidden"
   initial={{ opacity: 0, scale: 0.95 }}
   animate={{ opacity: 1, scale: 1 }}
   transition={{ delay: 0.4 }}
@@ -322,25 +339,19 @@ export default function HomePage() {
 </motion.h1>
 
 
-            <motion.p
-              className="text-base md:text-lg text-white/80 max-w-2xl mb-10 leading-relaxed tracking-wide font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-            >
-              We specialize in{" "}
-              <span className="text-orange-400 font-semibold">Study Visas</span>
-              ,{" "}
-              <span className="text-yellow-300 font-semibold">
-                Tourist Visas
-              </span>
-              , and{" "}
-              <span className="text-pink-400 font-semibold">
-                Permanent Residency (PR)
-              </span>{" "}
-              guidance. Join thousands of students we've helped succeed across
-              the globe.
-            </motion.p>
+
+<motion.p
+  className="text-base md:text-lg text-white/80 max-w-2xl mb-10 leading-relaxed tracking-wide font-bold drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]"
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.6 }}
+>
+  We specialize in{" "}
+  <span className="text-orange-400">Study Visas</span>,{" "}
+  <span className="text-yellow-300">Tourist Visas</span>, and{" "}
+  <span className="text-pink-400">Permanent Residency (PR)</span>{" "}
+  guidance. Join thousands of students we've helped succeed across the globe.
+</motion.p>
 
            <motion.div
   className="flex flex-wrap justify-center gap-4"
