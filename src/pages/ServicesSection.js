@@ -5,13 +5,11 @@ import {
   FaHome,
   FaChalkboardTeacher,
   FaBriefcase,
-  FaLaptopCode,
-  FaGlobe,
   FaFileAlt,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-// Images (via import for bundling)
+// Images
 import studyVisaImg from "../assets/study.jpg";
 import touristVisaImg from "../assets/Touristt.jpg";
 import prVisaImg from "../assets/pr.avif";
@@ -49,8 +47,6 @@ const baseServices = [
     icon: <FaBriefcase className="text-3xl text-purple-400" />,
     image: workVisaImg,
   },
-  
-  
   {
     title: "Document Assistance",
     short: "We help prepare all required documents for your visa journey.",
@@ -94,15 +90,15 @@ const ServicesSection = () => {
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 to-pink-500 bg-clip-text text-transparent drop-shadow-md animate-pulse">
+        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-yellow-300 via-pink-500 to-red-500 bg-clip-text text-transparent drop-shadow-lg animate-pulse">
           ✨ Our Premium Services
         </h2>
         <p className="mt-4 text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
-          End-to-end support for study, travel, work, PR & coaching.
+          End-to-end support for Study, Travel, Work, PR, and Language Coaching.
         </p>
       </motion.div>
 
-      {/* Service Cards */}
+      {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
         {services.map((service, index) => (
           <motion.div
@@ -111,20 +107,20 @@ const ServicesSection = () => {
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
             viewport={{ once: true }}
-            whileHover={{ scale: 1.03, rotateX: 2, rotateY: -2 }}
-            className="rounded-3xl backdrop-blur-xl bg-white/10 border border-white/10 p-6 text-white shadow-[0_8px_30px_rgba(255,255,255,0.05)] hover:shadow-pink-500/30 transition-transform"
+            whileHover={{ scale: 1.05 }}
+            className="rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/10 p-6 text-white shadow-[0_8px_30px_rgba(255,255,255,0.05)] hover:shadow-[0_0_25px_#f472b6] transition-all duration-300"
           >
             <img
               src={service.image}
               alt={service.title}
-              className="w-full h-40 object-cover rounded-xl mb-5 shadow-md"
+              className="w-full h-40 object-cover rounded-xl mb-5 shadow-lg"
             />
             <div className="flex justify-center mb-4">
               <div className="p-3 bg-white/10 rounded-full shadow-inner">
                 {service.icon}
               </div>
             </div>
-            <h3 className="text-center text-2xl font-bold text-cyan-300 mb-2">
+            <h3 className="text-center text-2xl font-bold text-yellow-300 mb-2 drop-shadow-md">
               {service.title}
             </h3>
             <p className="text-center text-sm text-gray-300 leading-relaxed mb-4">
@@ -133,7 +129,7 @@ const ServicesSection = () => {
             <div className="text-center">
               <button
                 onClick={() => toggleExpand(index)}
-                className="text-pink-400 hover:text-pink-300 font-medium text-sm transition hover:scale-105"
+                className="text-pink-400 hover:text-pink-300 font-semibold text-sm transition hover:scale-105"
               >
                 {expanded[index] ? "Show Less ▲" : "Read More ▼"}
               </button>

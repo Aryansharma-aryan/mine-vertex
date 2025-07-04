@@ -77,18 +77,34 @@ export default function HomePage() {
           {/* Top Contact Bar */}
           <div className="flex flex-wrap items-center justify-between px-4 sm:px-6 py-2 border-b border-gray-700 text-base font-medium">
             <div className="flex gap-4 flex-wrap items-center text-white/90 text-sm sm:text-base drop-shadow-md">
-              <span className="transition hover:text-orange-500 font-medium">
-                📞 <strong className="text-orange-400">Phone:</strong>{" "}
-                <span className=" text-white shadow-[0_0_6px_rgba(255,90,0,0.6)]">
-                  8053555546, 9996140555
-                </span>
-              </span>
-              <span className="transition hover:text-orange-500 font-medium">
-                📧 <strong className="text-orange-400">Email:</strong>{" "}
-                <span className="text-yellow-300 font-semibold shadow-[0_0_6px_rgba(255,90,0,0.6)]">
-                  vertexstudyvisa@gmail.com
-                </span>
-              </span>
+       <span className="transition font-semibold text-white">
+  📞 <strong className="text-orange-500">Phone:</strong>{" "}
+  <a
+    href="tel:+918053555546"
+    className="text-yellow-300 hover:text-white font-bold shadow-[0_0_8px_rgba(255,193,7,0.7)] transition duration-200"
+  >
+    8053555546
+  </a>
+  <span className="mx-2 text-orange-400 font-bold">|</span>
+  <a
+    href="tel:+919996140555"
+    className="text-yellow-300 hover:text-white font-bold shadow-[0_0_8px_rgba(255,193,7,0.7)] transition duration-200"
+  >
+    9996140555
+  </a>
+</span>
+
+
+             <span className="transition hover:text-orange-500 font-medium">
+  📧 <strong className="text-orange-400">Email:</strong>{" "}
+  <a
+    href="mailto:vertexstudyvisa@gmail.com"
+    className="text-yellow-300 font-semibold hover:text-orange-400 shadow-[0_0_6px_rgba(255,90,0,0.6)] transition duration-200"
+  >
+    vertexstudyvisa@gmail.com
+  </a>
+</span>
+
             </div>
             <div className="flex gap-4 text-orange-500 text-xl">
               {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn].map(
@@ -123,47 +139,54 @@ export default function HomePage() {
               whileHover={{ scale: 1.05 }}
             />
 
-            <motion.nav
-              className="hidden md:flex gap-6 text-base lg:text-xl font-semibold tracking-wide"
-              initial="hidden"
-              animate="visible"
-              variants={{
-                visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
-                hidden: { opacity: 0 },
-              }}
-            >
-              {[
-                "/",
-                "/services",
-                "/test-preparation",
-                "/about",
-                "/contact",
-                "/Faq",
-                "/team",
-              ].map((path, i) => (
-                <motion.div
-                  key={i}
-                  variants={{
-                    hidden: { opacity: 0, y: 10 },
-                    visible: { opacity: 1, y: 0 },
-                  }}
-                >
-                  <Link
-                    to={path}
-                    className="hover:text-orange-400 transition whitespace-nowrap"
-                  >
-                    {path === "/"
-                      ? "Home"
-                      : path === "/Faq"
-                      ? "FAQ"
-                      : path
-                          .slice(1)
-                          .replace("-", " ")
-                          .replace(/\b\w/g, (c) => c.toUpperCase())}
-                  </Link>
-                </motion.div>
-              ))}
-            </motion.nav>
+           <motion.nav
+  className="hidden md:flex gap-6 lg:gap-10 text-base lg:text-lg font-semibold tracking-wide"
+  initial="hidden"
+  animate="visible"
+  variants={{
+    visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
+    hidden: { opacity: 0 },
+  }}
+>
+  {[
+    { path: "/", label: "Home" },
+    { path: "/services", label: "Services" },
+    { path: "/test-preparation", label: "Test Preparation" },
+    { path: "/about", label: "About" },
+    { path: "/contact", label: "Contact" },
+    { path: "/Faq", label: "FAQ" },
+    { path: "/team", label: "Team" },
+  ].map(({ path, label }, i) => (
+    <motion.div
+      key={i}
+      variants={{
+        hidden: { opacity: 0, y: 12 },
+        visible: { opacity: 1, y: 0 },
+      }}
+    >
+      <Link
+        to={path}
+        className="relative group px-2 py-1 text-[#e2ecfa] transition duration-300 hover:scale-105"
+      >
+        {/* Text shimmer */}
+        <span className="relative z-10 group-hover:text-transparent bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#ff9d3f] group-hover:via-[#ffce5a] group-hover:to-[#ff8b3d] transition-all duration-300">
+          {label}
+        </span>
+
+        {/* Underline animation */}
+        <span className="absolute left-1/2 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-[#ff7a00] via-[#ffc933] to-[#ff5e00] rounded transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+
+        {/* Glow blur hover */}
+        <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-orange-500/20 via-yellow-400/20 to-pink-400/10 blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none" />
+
+        {/* Border shimmer (optional) */}
+        <span className="absolute -inset-0.5 rounded-lg border border-transparent group-hover:border-orange-300/30 transition-all duration-300 pointer-events-none" />
+      </Link>
+    </motion.div>
+  ))}
+</motion.nav>
+
+
 
             <motion.div
               className="hidden md:block"
@@ -189,60 +212,69 @@ export default function HomePage() {
 
           {/* Mobile Sidebar */}
           <AnimatePresence>
-            {isSidebarOpen && (
-              <motion.aside
-                initial={{ x: "100%", opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: "100%", opacity: 0 }}
-                transition={{ type: "tween", duration: 0.3 }}
-                className="fixed top-0 right-0 w-64 h-full bg-[#0a1f3c] z-50 shadow-lg flex flex-col p-6 gap-6"
-              >
-                <div className="flex justify-between items-center mb-4">
-                  <FaTimes
-                    onClick={toggleSidebar}
-                    className="text-white text-xl cursor-pointer"
-                  />
-                </div>
-                {[
-                  "/",
-                  "/services",
-                  "/test-preparation",
-                  "/about",
-                  "/contact",
-                  "/Faq",
-                  "/team",
-                ].map((path, i) => (
-                  <Link
-                    key={i}
-                    to={path}
-                    onClick={toggleSidebar}
-                    className="text-base font-semibold hover:text-orange-400"
-                  >
-                    {path === "/"
-                      ? "Home"
-                      : path
-                          .slice(1)
-                          .replace("-", " ")
-                          .replace(/\b\w/g, (c) => c.toUpperCase())}
-                  </Link>
-                ))}
-                <Link to="/quote" onClick={toggleSidebar}>
-                  <button className="relative mt-4 px-7 py-3 text-white font-semibold text-base rounded-xl 
-                    bg-gradient-to-br from-[#2c0f00] via-[#ff6b00] to-[#ff944d] 
-                    shadow-[0_0_25px_rgba(255,130,40,0.5),_0_0_50px_rgba(255,120,0,0.35)] 
-                    border border-orange-100/10 ring-1 ring-orange-500/20 
-                    backdrop-blur-sm overflow-hidden transition-all duration-300 transform hover:-translate-y-1 
-                    hover:shadow-[0_0_40px_rgba(255,140,40,0.7),_0_0_80px_rgba(255,100,0,0.4)]">
-                    <span className="absolute inset-0 bg-gradient-to-br from-[#ff6a00]/20 via-[#ff8800]/20 to-[#ff5e00]/20 
-                      blur-2xl opacity-50 rounded-xl pointer-events-none z-0" />
-                    <span className="absolute top-0 left-0 w-full h-full rounded-xl bg-white/10 opacity-10 
-                      pointer-events-none z-0" />
-                    <span className="relative z-10 tracking-wide">Get A Quote</span>
-                  </button>
-                </Link>
-              </motion.aside>
-            )}
-          </AnimatePresence>
+  {isSidebarOpen && (
+    <motion.aside
+      initial={{ x: "100%", opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: "100%", opacity: 0 }}
+      transition={{ type: "tween", duration: 0.3 }}
+      className="fixed top-0 right-0 w-64 h-full bg-[#0a1f3c] z-50 shadow-lg flex flex-col p-6 gap-6"
+    >
+      {/* Close Icon */}
+      <div className="flex justify-end mb-4">
+        <FaTimes
+          onClick={toggleSidebar}
+          className="text-orange-400 text-2xl cursor-pointer hover:scale-110 transition-transform"
+        />
+      </div>
+
+      {/* Nav Links */}
+      {[
+        { path: "/", label: "Home" },
+        { path: "/services", label: "Services" },
+        { path: "/test-preparation", label: "Test Preparation" },
+        { path: "/about", label: "About" },
+        { path: "/contact", label: "Contact" },
+        { path: "/Faq", label: "FAQ" },
+        { path: "/team", label: "Team" },
+      ].map(({ path, label }, i) => (
+        <Link
+          key={i}
+          to={path}
+          onClick={toggleSidebar}
+          className="text-[15px] font-semibold text-gray-200 hover:text-orange-400 transition-all tracking-wide relative group"
+        >
+          <span className="relative z-10">{label}</span>
+          <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-gradient-to-r from-orange-400 to-yellow-400 group-hover:w-full transition-all duration-300 rounded" />
+        </Link>
+      ))}
+
+      {/* Get A Quote Button */}
+      <Link to="/quote" onClick={toggleSidebar}>
+        <button className="relative mt-6 px-6 py-3 text-white font-semibold text-sm rounded-xl 
+          bg-gradient-to-br from-[#2c0f00] via-[#ff6b00] to-[#ff944d] 
+          shadow-[0_0_25px_rgba(255,130,40,0.5),_0_0_50px_rgba(255,120,0,0.35)] 
+          border border-orange-100/10 ring-1 ring-orange-500/30 
+          backdrop-blur-md overflow-hidden transition-all duration-300 transform hover:-translate-y-1 
+          hover:shadow-[0_0_40px_rgba(255,140,40,0.7),_0_0_80px_rgba(255,100,0,0.4)]">
+          
+          {/* Glow Layer */}
+          <span className="absolute inset-0 bg-gradient-to-br from-[#ff6a00]/20 via-[#ff8800]/20 to-[#ff5e00]/20 
+            blur-2xl opacity-50 rounded-xl pointer-events-none z-0" />
+
+          {/* Subtle Overlay */}
+          <span className="absolute top-0 left-0 w-full h-full rounded-xl bg-white/10 opacity-10 
+            pointer-events-none z-0" />
+
+          {/* Text */}
+          <span className="relative z-10 tracking-wide bg-gradient-to-r from-[#fff] via-[#ffe6d4] to-[#fff2e0] bg-clip-text text-transparent">
+            Get A Quote
+          </span>
+        </button>
+      </Link>
+    </motion.aside>
+  )}
+</AnimatePresence>
 
           {/* Hero Content */}
           <motion.section
@@ -263,28 +295,32 @@ export default function HomePage() {
               </span>
             </motion.h2>
 
-            <motion.h1
-              className="text-[32px] sm:text-[48px] md:text-[64px] leading-tight font-extrabold mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#ff5a00] via-[#ff7b00] to-[#ff5a00]"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              <Typewriter
-                words={[
-                  "Vertex Study Visa",
-                  "Study in Canada 🇨🇦",
-                  "Australia Admissions 🇦🇺",
-                  "USA, UK & Europe 🌍",
-                  "Visa Experts & PR Guidance",
-                ]}
-                loop={Infinity}
-                cursor
-                cursorStyle="|"
-                typeSpeed={50}
-                deleteSpeed={40}
-                delaySpeed={800}
-              />
-            </motion.h1>
+          <motion.h1
+  className="text-[32px] sm:text-[48px] md:text-[64px] leading-tight font-extrabold mb-6 tracking-tight 
+    text-transparent bg-clip-text 
+    bg-gradient-to-r from-orange-400 via-yellow-300 to-pink-500 
+    drop-shadow-[0_1px_1px_rgba(255,130,0,0.6)]"
+  initial={{ opacity: 0, scale: 0.95 }}
+  animate={{ opacity: 1, scale: 1 }}
+  transition={{ delay: 0.4 }}
+>
+  <Typewriter
+    words={[
+      "Vertex Study Visa",
+      "Study in Canada 🇨🇦",
+      "Australia Admissions 🇦🇺",
+      "USA, UK & Europe 🌍",
+      "Visa Experts & PR Guidance",
+    ]}
+    loop={Infinity}
+    cursor
+    cursorStyle="|"
+    typeSpeed={50}
+    deleteSpeed={40}
+    delaySpeed={800}
+  />
+</motion.h1>
+
 
             <motion.p
               className="text-base md:text-lg text-white/80 max-w-2xl mb-10 leading-relaxed tracking-wide font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]"
@@ -306,20 +342,29 @@ export default function HomePage() {
               the globe.
             </motion.p>
 
-            <motion.div
-              className="flex flex-wrap justify-center gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-            >
-              <Link to="/consultant">
-                <button className="relative px-8 py-4 text-white font-semibold text-lg rounded-xl backdrop-blur-md bg-white/10 border border-white/20 overflow-hidden shadow-[0_12px_32px_rgba(255,90,0,0.5)] scale-[1.03] ring-1 ring-orange-400/40 group transition-all duration-300">
-                  <span className="absolute inset-0 bg-gradient-to-r from-[#ff5a00]/30 via-[#ff8800]/30 to-[#ff5a00]/30 blur-xl opacity-60 transition-all duration-500 pointer-events-none" />
-                  <span className="absolute inset-0 rounded-xl border border-orange-500 opacity-15 pointer-events-none" />
-                  <span className="relative z-10">GET FREE CONSULTATION</span>
-                </button>
-              </Link>
-            </motion.div>
+           <motion.div
+  className="flex flex-wrap justify-center gap-4"
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.6 }}
+>
+  <Link to="/consultant">
+    <button className="relative px-8 py-4 text-white font-semibold text-lg rounded-xl backdrop-blur-md bg-white/10 border border-white/20 overflow-hidden shadow-[0_12px_32px_rgba(255,90,0,0.5)] scale-[1.03] ring-1 ring-orange-400/40 group transition-all duration-300">
+      
+      {/* Glow blur background */}
+      <span className="absolute inset-0 bg-gradient-to-r from-[#ff5a00]/30 via-[#ff8800]/30 to-[#ff5a00]/30 blur-xl opacity-60 transition-all duration-500 pointer-events-none" />
+
+      {/* Border layer */}
+      <span className="absolute inset-0 rounded-xl border border-orange-500/20 pointer-events-none" />
+
+      {/* Gradient text layer */}
+      <span className="relative z-10 bg-gradient-to-r from-[#ff5a00] via-[#ff8800] to-[#ff5a00] bg-clip-text text-transparent tracking-wide">
+        GET FREE CONSULTATION
+      </span>
+    </button>
+  </Link>
+</motion.div>
+
           </motion.section>
         </div>
       </div>

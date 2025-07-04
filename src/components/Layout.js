@@ -25,18 +25,34 @@ const Layout = () => {
           isHome ? "bg-transparent" : "bg-[#0a1f3c]"
         }`}
       >
-        <div className="flex gap-6 flex-wrap font-medium tracking-wide">
-          <span className="text-white">
-            <strong className="text-orange-400">Phone:</strong>{" "}
-            <span className="text-white">8053555546,9996140555</span>
-          </span>
-          <span className="text-white">
-            <strong className="text-orange-400">Email:</strong>{" "}
-            <span className="text-orange-300 ">
-              vertexstudyvisa@gmail.com
-            </span>
-          </span>
-        </div>
+        <div className="flex gap-6 flex-wrap font-medium tracking-wide text-white">
+  <span>
+    <strong className="text-orange-500">📞 Phone:</strong>{" "}
+    <a
+      href="tel:+918053555546"
+      className="text-yellow-300 font-bold hover:text-white shadow-[0_0_8px_rgba(255,193,7,0.7)] transition duration-200"
+    >
+      8053555546
+    </a>
+    <span className="mx-2 text-orange-400 font-bold">|</span>
+    <a
+      href="tel:+919996140555"
+      className="text-yellow-300 font-bold hover:text-white shadow-[0_0_8px_rgba(255,193,7,0.7)] transition duration-200"
+    >
+      9996140555
+    </a>
+  </span>
+
+  <span>
+    <strong className="text-orange-500">📧 Email:</strong>{" "}
+    <a
+      href="mailto:vertexstudyvisa@gmail.com"
+      className="text-yellow-300 font-bold hover:text-white shadow-[0_0_8px_rgba(255,193,7,0.7)] transition duration-200"
+    >
+      vertexstudyvisa@gmail.com
+    </a>
+  </span>
+</div>
 
         <div className="flex gap-3 text-xl">
           {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn].map(

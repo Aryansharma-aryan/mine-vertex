@@ -22,58 +22,43 @@ const successStories = [
   { name: "Arpreet", image: arpreet },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, rotateY: -90 },
-  visible: (i) => ({
-    opacity: 1,
-    rotateY: 0,
-    transition: {
-      delay: i * 0.1,
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  }),
-};
-
 const SuccessStory = () => {
   return (
-    <section className="py-24 px-4 sm:px-6 bg-black text-white font-[Poppins]">
+    <section className="py-24 px-4 sm:px-6 bg-gradient-to-br from-[#0b0b0b] via-[#111111] to-[#1a1a1a] text-white font-[Poppins]">
       {/* Title */}
-      <div className="text-center mb-20">
-        <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 animate-pulse">
-          🌟 Success Stories
-        </h2>
-        <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mt-4">
-          Our proud achievers who transformed their futures with Vertex Study Visa.
-        </p>
-      </div>
+<div className="text-center mb-20">
+  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#ffffff] via-[#d4af37] to-[#ffce7a] drop-shadow-lg animate-fade-in-down hover:underline hover:underline-offset-8 transition-all duration-500">
+    🌟 Success Stories
+  </h2>
+  <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mt-4 leading-relaxed">
+    Celebrating students who shaped their dreams with <span className="font-semibold text-white">Vertex Study Visa</span>.
+  </p>
+</div>
 
       {/* Cards Grid */}
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-7xl mx-auto px-2 sm:px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-7xl mx-auto">
         {successStories.map(({ name, image }, index) => (
-          <motion.div
+          <div
             key={index}
-            custom={index}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={cardVariants}
-            className="relative rounded-3xl overflow-hidden border border-gray-800 bg-[#0b0b0b] transition-transform duration-300 hover:scale-105 hover:border-cyan-500 shadow-lg hover:shadow-cyan-500/20"
+            className="relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-xl transition-transform duration-300 hover:scale-[1.03] shadow-2xl shadow-white/10"
           >
-            {/* Card Content */}
-            <div className="h-44 sm:h-56 md:h-64 overflow-hidden rounded-t-3xl">
+            {/* Image */}
+            <div className="h-56 sm:h-64 md:h-72 overflow-hidden rounded-t-3xl">
               <img
                 src={image}
                 alt={name}
-                className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105"
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
               />
             </div>
-            <div className="p-4 sm:p-6 text-center">
-              <h3 className="text-lg sm:text-2xl font-semibold tracking-wide text-transparent bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text">
+
+            {/* Content */}
+            <div className="p-5 sm:p-6 text-center">
+              <h3 className="text-xl sm:text-2xl font-semibold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-400">
                 {name}
               </h3>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </section>
