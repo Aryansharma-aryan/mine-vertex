@@ -294,89 +294,83 @@ export default function HomePage() {
 
 
           {/* Hero Content */}
-          <motion.section
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col items-center justify-center flex-1 px-4 sm:px-6 md:px-16 text-center"
-          >
-            <motion.h2
-              className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-md"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              Achieve Your Dream to Study Abroad with{" "}
-              <span className="text-[#ff5a00] drop-shadow-lg">
-                Vertex Study Visa
-              </span>
-            </motion.h2>
-
-      <motion.h1
-  className="text-[32px] sm:text-[44px] md:text-[64px] lg:text-[80px] xl:text-[96px] 
-    leading-tight font-extrabold mb-6 tracking-tight text-transparent bg-clip-text 
-    bg-gradient-to-r from-orange-400 via-yellow-300 to-pink-500 
-    drop-shadow-[0_1px_1px_rgba(255,130,0,0.6)] whitespace-nowrap overflow-hidden"
-  initial={{ opacity: 0, scale: 0.95 }}
-  animate={{ opacity: 1, scale: 1 }}
-  transition={{ delay: 0.4 }}
+         <motion.section
+  initial={{ y: 50, opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  transition={{ duration: 0.6, delay: 0.2 }}
+  className="flex flex-col items-center justify-center flex-1 px-4 sm:px-6 md:px-16 py-8 text-center"
 >
-  <Typewriter
-    words={[
-      "Vertex Study Visa",
-      "Study in Canada 🇨🇦",
-      "Australia Admissions 🇦🇺",
-      "USA, UK & Europe 🌍",
-      "Visa Experts & PR Guidance",
-    ]}
-    loop={Infinity}
-    cursor
-    cursorStyle="|"
-    typeSpeed={50}
-    deleteSpeed={40}
-    delaySpeed={800}
-  />
-</motion.h1>
+  {/* Small Heading */}
+  <motion.h2
+    className="text-[20px] sm:text-[26px] md:text-[32px] font-bold mb-4 text-white drop-shadow-md leading-snug"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.3 }}
+  >
+    Achieve Your Dream to Study Abroad with{" "}
+    <span className="text-[#ff5a00] drop-shadow-lg">Vertex Study Visa</span>
+  </motion.h2>
 
+  {/* Typewriter Main Heading */}
+  <motion.h1
+    className="text-[32px] sm:text-[44px] md:text-[64px] lg:text-[80px] xl:text-[96px] 
+      leading-tight font-extrabold mb-6 tracking-tight text-transparent bg-clip-text 
+      bg-gradient-to-r from-orange-400 via-yellow-300 to-pink-500 
+      drop-shadow-[0_1px_1px_rgba(255,130,0,0.6)] whitespace-normal sm:whitespace-nowrap overflow-hidden"
+    initial={{ opacity: 0, scale: 0.95 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ delay: 0.4 }}
+  >
+    <Typewriter
+      words={[
+        "Vertex Study Visa",
+        "Study in Canada 🇨🇦",
+        "Australia Admissions 🇦🇺",
+        "USA, UK & Europe 🌍",
+        "Visa Experts & PR Guidance",
+      ]}
+      loop={Infinity}
+      cursor
+      cursorStyle="|"
+      typeSpeed={50}
+      deleteSpeed={40}
+      delaySpeed={800}
+    />
+  </motion.h1>
 
+  {/* Sub Text */}
+  <motion.p
+    className="text-sm sm:text-base md:text-lg text-white/80 max-w-2xl mb-8 sm:mb-10 leading-relaxed tracking-wide font-bold drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.6 }}
+  >
+    We specialize in{" "}
+    <span className="text-orange-400">Study Visas</span>,{" "}
+    <span className="text-yellow-300">Tourist Visas</span>, and{" "}
+    <span className="text-pink-400">Permanent Residency (PR)</span>{" "}
+    guidance. Join thousands of students we've helped succeed across the globe.
+  </motion.p>
 
-<motion.p
-  className="text-base md:text-lg text-white/80 max-w-2xl mb-10 leading-relaxed tracking-wide font-bold drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]"
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.6 }}
->
-  We specialize in{" "}
-  <span className="text-orange-400">Study Visas</span>,{" "}
-  <span className="text-yellow-300">Tourist Visas</span>, and{" "}
-  <span className="text-pink-400">Permanent Residency (PR)</span>{" "}
-  guidance. Join thousands of students we've helped succeed across the globe.
-</motion.p>
+  {/* CTA Button */}
+  <motion.div
+    className="flex flex-wrap justify-center gap-4"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.7 }}
+  >
+    <Link to="/consultant">
+      <button className="relative px-8 py-4 text-white font-semibold text-lg rounded-xl backdrop-blur-md bg-white/10 border border-white/20 overflow-hidden shadow-[0_12px_32px_rgba(255,90,0,0.5)] scale-[1.03] ring-1 ring-orange-400/40 group transition-all duration-300">
+        <span className="absolute inset-0 bg-gradient-to-r from-[#ff5a00]/30 via-[#ff8800]/30 to-[#ff5a00]/30 blur-xl opacity-60 transition-all duration-500 pointer-events-none" />
+        <span className="absolute inset-0 rounded-xl border border-orange-500/20 pointer-events-none" />
+        <span className="relative z-10 bg-gradient-to-r from-[#ff5a00] via-[#ff8800] to-[#ff5a00] bg-clip-text text-transparent tracking-wide">
+          GET FREE CONSULTATION
+        </span>
+      </button>
+    </Link>
+  </motion.div>
+</motion.section>
 
-           <motion.div
-  className="flex flex-wrap justify-center gap-4"
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.6 }}
->
-  <Link to="/consultant">
-    <button className="relative px-8 py-4 text-white font-semibold text-lg rounded-xl backdrop-blur-md bg-white/10 border border-white/20 overflow-hidden shadow-[0_12px_32px_rgba(255,90,0,0.5)] scale-[1.03] ring-1 ring-orange-400/40 group transition-all duration-300">
-      
-      {/* Glow blur background */}
-      <span className="absolute inset-0 bg-gradient-to-r from-[#ff5a00]/30 via-[#ff8800]/30 to-[#ff5a00]/30 blur-xl opacity-60 transition-all duration-500 pointer-events-none" />
-
-      {/* Border layer */}
-      <span className="absolute inset-0 rounded-xl border border-orange-500/20 pointer-events-none" />
-
-      {/* Gradient text layer */}
-      <span className="relative z-10 bg-gradient-to-r from-[#ff5a00] via-[#ff8800] to-[#ff5a00] bg-clip-text text-transparent tracking-wide">
-        GET FREE CONSULTATION
-      </span>
-    </button>
-  </Link>
-</motion.div>
-
-          </motion.section>
         </div>
       </div>
 
