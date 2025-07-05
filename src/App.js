@@ -1,9 +1,14 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+  useNavigationType,
+} from 'react-router-dom';
 import Loader from './pages/Loader';
 import Footer from './components/Footer';
 
-// Lazy Load Components
 const HomePage = lazy(() => import('./components/HomePage'));
 const Layout = lazy(() => import('./components/Layout'));
 const AboutSection = lazy(() => import('./pages/AboutSection'));
@@ -15,25 +20,29 @@ const GetConsultant = lazy(() => import('./pages/GetConsultant'));
 const ConsultationSection = lazy(() => import('./pages/Faq'));
 const Team = lazy(() => import('./pages/Team'));
 
-function App() {
-  const [loading, setLoading] = useState(true);
+function AppWrapper() {
+  const location = useLocation();
+  const navigationType = useNavigationType();
 
-  // Initial splash loader
+  const [routeLoading, setRouteLoading] = useState(false);
+
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000); // faster: 1s
-    return () => clearTimeout(timer);
-  }, []);
+    if (navigationType === 'PUSH' || navigationType === 'POP') {
+      setRouteLoading(true);
+      const timer = setTimeout(() => {
+        setRouteLoading(false);
+      }, 600); // Simulate loading time
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
 
-  if (loading) return <Loader />;
+  if (routeLoading) return <Loader />;
 
   return (
-    <Router>
+    <>
       <Suspense fallback={<Loader />}>
         <Routes>
-          {/* HomePage (custom layout) */}
           <Route path="/" element={<HomePage />} />
-
-          {/* All Other Pages (wrapped in Layout) */}
           <Route element={<Layout />}>
             <Route path="/about" element={<AboutSection />} />
             <Route path="/services" element={<ServicesSection />} />
@@ -47,6 +56,14 @@ function App() {
         </Routes>
         <Footer />
       </Suspense>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppWrapper />
     </Router>
   );
 }

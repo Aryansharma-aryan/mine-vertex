@@ -29,6 +29,7 @@ export default {
         fadeInDown: "fadeInDown 1s ease-out forwards",
         typing: "typing 3.5s steps(30, end) 1 forwards",
         blink: "blink 0.8s step-end infinite",
+        zoom: "zoom 20s ease-in-out infinite", // ✅ Zoom Animation
       },
       keyframes: {
         fade: {
@@ -67,12 +68,15 @@ export default {
         },
         blink: {
           "0%, 100%": { borderColor: "transparent" },
-          "50%": { borderColor: "#3b82f6" }, // Tailwind blue-500
+          "50%": { borderColor: "#3b82f6" },
+        },
+        zoom: {
+          "0%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.1)" },
+          "100%": { transform: "scale(1)" },
         },
       },
     },
   },
-  plugins: [
-    require("@tailwindcss/line-clamp"),
-  ],
+  plugins: [require("@tailwindcss/line-clamp")],
 };
