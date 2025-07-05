@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 
-export default function ConsultationPage() {
+export default function GetConsultant() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,17 +20,38 @@ export default function ConsultationPage() {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you can send data to your backend or API
-    setSubmitted(true);
+    setLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/consultants", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        console.error("Submission failed");
+        alert("Failed to submit. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred. Please check your connection.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const progress = `${(step / 3) * 100}%`;
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-[#0a1f3c] via-[#0a1f3c] to-[#141e30] text-white font-sans overflow-hidden">
-      {/* Animated Gradient Blobs */}
+      {/* Gradient Background Blobs */}
       <div className="absolute -top-24 -left-24 w-[400px] h-[400px] bg-orange-500 rounded-full mix-blend-screen blur-3xl opacity-20 animate-ping"></div>
       <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] bg-yellow-400 rounded-full mix-blend-overlay blur-3xl opacity-10 animate-pulse"></div>
 
@@ -146,7 +168,8 @@ export default function ConsultationPage() {
                         name="interest"
                         value={formData.interest}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 rounded-xl bg-white/20 text-white border border-white/30 focus:outline-none"
+                        required
+                        className="w-full px-4 py-2 rounded-xl bg-white/20 text-black border border-white/30 focus:outline-none"
                       >
                         <option value="">-- Choose --</option>
                         <option>Study Visa</option>
@@ -198,9 +221,14 @@ export default function ConsultationPage() {
                   ) : (
                     <button
                       type="submit"
-                      className="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-lg text-white font-semibold transition hover:scale-105"
+                      disabled={loading}
+                      className={`px-6 py-2 rounded-lg font-semibold transition ${
+                        loading
+                          ? "bg-gray-500 cursor-not-allowed"
+                          : "bg-green-500 hover:bg-green-600 text-white hover:scale-105"
+                      }`}
                     >
-                      Submit
+                      {loading ? "Submitting..." : "Submit"}
                     </button>
                   )}
                 </div>

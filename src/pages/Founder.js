@@ -23,7 +23,7 @@ const FounderSection = () => {
             Founder, Vertex Study Overseas
           </p>
           <p className="text-gray-300 leading-relaxed text-[16px] mb-4">
-            With over <strong>8+ years of global experience</strong> in visa consultation and education strategy, Gurbaj has built Vertex into a brand of trust, transparency, and results. Now based in the UK, he’s helped thousands achieve their study abroad dreams.
+            With over <strong>16+ years of global experience</strong> in visa consultation and education strategy, Gurbaj has built Vertex into a brand of trust, transparency, and results. Now based in the UK, he’s helped thousands achieve their study abroad dreams.
           </p>
           <p className="text-gray-400 text-sm italic">
             “Every student has a unique path. My mission is to help them walk it with confidence and clarity.”

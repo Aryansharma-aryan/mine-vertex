@@ -28,13 +28,27 @@ import TestPreparation from "../pages/TestPrepration";
 import SuccessStory from "../pages/SuccessStory";
 import ConsultationSection from "../pages/Faq";
 import Team from "../pages/Team";
+const socialIcons = [
+  { Icon: FaFacebookF, color: "#1877F2", name: "Facebook" },
+  { Icon: FaTwitter, color: "#1DA1F2", name: "Twitter" },
+  { Icon: FaInstagram, color: "#E4405F", name: "Instagram" },
+  { Icon: FaLinkedinIn, color: "#0077B5", name: "LinkedIn" },
+];
 
 export default function HomePage() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+
   useEffect(() => {
-    document.body.style.overflow = isSidebarOpen ? 'hidden' : 'auto';
+    document.body.style.overflow = isSidebarOpen ? "hidden" : "auto";
   }, [isSidebarOpen]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("adminToken");
+    setIsAdmin(!!token); // Set admin state based on token presence
+  }, []);
 
   const backgroundImages = [hero, hero2, hero3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -43,7 +57,6 @@ export default function HomePage() {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % backgroundImages.length);
     }, 4000);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -62,79 +75,65 @@ export default function HomePage() {
     { path: "/contact", label: "Contact" },
     { path: "/Faq", label: "FAQ" },
     { path: "/team", label: "Team" },
+    { path: "/admin/login", label: "Login" },
   ];
 
   return (
     <div className="font-sans text-white overflow-x-hidden max-w-screen">
-      {/* Hero Section */}
       <div className="relative min-h-screen overflow-hidden">
-        {/* Background Carousel */}
-<AnimatePresence>
-  <motion.div
-    key={currentImageIndex}
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 1 }}
-    className="absolute inset-0 bg-cover bg-center"
-    style={{
-      backgroundImage: `url(${backgroundImages[currentImageIndex]})`,
-      zIndex: 0,
-    }}
-  >
-    {/* Blur and dark overlay for better text readability */}
-     <div className="relative z-10 flex flex-col min-h-screen bg-black/40 backdrop-blur-sm"/>
+        <AnimatePresence>
+          <motion.div
+            key={currentImageIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${backgroundImages[currentImageIndex]})`, zIndex: 0 }}
+          >
+            <div className="relative z-10 flex flex-col min-h-screen bg-black/40 backdrop-blur-sm" />
+          </motion.div>
+        </AnimatePresence>
 
-  </motion.div>
-</AnimatePresence>
+        <div className="relative z-10 flex flex-col min-h-screen bg-black/20">
+          {/* Topbar */}
+          <div className="flex items-center justify-between px-4 sm:px-6 py-2 border-b border-gray-700 bg-[#0a0a0a] text-sm sm:text-base">
+            <div className="flex gap-6">
+              <span className="flex items-center gap-2">
+                📞 <strong className="text-[#00c97d]">Phone:</strong>
+                <a href="tel:+918053555546" className="text-[#ffd3a3] font-bold">8053555546</a>
+                <span className="mx-2 text-[#00c97d] font-bold">|</span>
+                <a href="tel:+919996140555" className="text-[#ffd3a3] font-bold">9996140555</a>
+              </span>
+              <span className="flex items-center gap-2">
+                📧 <strong className="text-orange-400">Email:</strong>
+                <a href="mailto:vertexstudyvisa@gmail.com" className="text-yellow-300 font-semibold">vertexstudyvisa@gmail.com</a>
+              </span>
+            </div>
+           
+<div className="flex gap-4 text-xl">
+  {socialIcons.map(({ Icon, color, name }, i) => (
+    <motion.div
+      key={i}
+      whileHover={{ scale: 1.2 }}
+      className="cursor-pointer"
+      style={{ color }}
+      aria-label={name}
+      title={name}
+    >
+      <Icon />
+    </motion.div>
+  ))}
+</div>
 
-{/* Hero Content Overlay */}
-<div className="relative z-10 flex flex-col min-h-screen bg-black/20">
-  {/* Top Contact Bar */}
-  <div className="flex flex-wrap items-center justify-between gap-4 px-4 sm:px-6 py-2 border-b border-gray-700 bg-[#0a0a0a] text-sm sm:text-base">
-    {/* Contact Info */}
-    <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 w-full sm:w-auto">
-      <span className="flex flex-wrap items-center gap-2">
-        📞 <strong className="text-[#00c97d]">Phone:</strong>
-        <a href="tel:+918053555546" className="text-[#ffd3a3] font-bold">8053555546</a>
-        <span className="hidden sm:inline mx-2 text-[#00c97d] font-bold">|</span>
-        <a href="tel:+919996140555" className="text-[#ffd3a3] font-bold">9996140555</a>
-      </span>
-      <span className="flex flex-wrap items-center gap-2">
-        📧 <strong className="text-orange-400">Email:</strong>
-        <a href="mailto:vertexstudyvisa@gmail.com" className="text-yellow-300 font-semibold break-all">
-          vertexstudyvisa@gmail.com
-        </a>
-      </span>
-    </div>
+          </div>
 
-    {/* Social Icons */}
-    <div className="flex gap-3 text-xl justify-center sm:justify-end w-full sm:w-auto">
-      {[
-        { Icon: FaFacebookF, color: "#1877F2" },
-        { Icon: FaTwitter, color: "#1DA1F2" },
-        { Icon: FaInstagram, color: "#E1306C" },
-        { Icon: FaLinkedinIn, color: "#0077B5" },
-      ].map(({ Icon, color }, i) => (
-        <motion.div
-          key={i}
-          whileHover={{ scale: 1.2 }}
-          className="cursor-pointer"
-          style={{ color }}
-        >
-          <Icon />
-        </motion.div>
-      ))}
-    </div>
-  </div>
-
-
-          {/* Header with Sidebar Toggle */}
+          {/* Header */}
           <header className="flex items-center justify-between p-4">
             <motion.img
               src={logo}
               alt="Vertex Logo"
-              className="w-24 object-contain"
+              className="w-32 sm:w-39 object-contain"
               whileHover={{ scale: 1.05 }}
             />
             <div onClick={toggleSidebar} className="text-3xl text-orange-400 cursor-pointer">
@@ -143,71 +142,90 @@ export default function HomePage() {
           </header>
 
           {/* Sidebar */}
-<AnimatePresence>
-  {isSidebarOpen && (
-    <motion.aside
-  initial={{ x: "100%" }}
-  animate={{ x: 0 }}
-  exit={{ x: "100%" }}
-  transition={{ duration: 0.3 }}
-  className="fixed top-0 right-0 w-64 h-full overflow-y-auto bg-[#121e2d] text-white z-50 shadow-xl flex flex-col p-6 gap-6"
->
+          <AnimatePresence>
+            {isSidebarOpen && (
+              <motion.aside
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ duration: 0.3 }}
+                className="fixed top-0 right-0 w-64 h-full overflow-y-auto bg-[#121e2d] text-white z-50 shadow-xl flex flex-col p-6 gap-6"
+              >
+                <div>
+                  <div className="flex justify-between items-center mb-6">
+                    <img src={logo} alt="Vertex Logo" className="w-24 object-contain" />
+                    <FaTimes
+                      onClick={toggleSidebar}
+                      className="text-2xl text-white cursor-pointer hover:text-red-400 transition"
+                    />
+                  </div>
 
-      {/* Top Section: Logo + Close */}
-      <div>
-        <div className="flex justify-between items-center mb-6">
-          <img src={logo} alt="Vertex Logo" className="w-24 object-contain" />
-          <FaTimes
-            onClick={toggleSidebar}
-            className="text-2xl !text-white cursor-pointer hover:text-red-400 transition"
-          />
-        </div>
+                  <nav className="flex flex-col gap-4">
+                    {navLinks.map(({ path, label }, i) => {
+                      if (label === "Login") {
+                        return isAdmin ? (
+                          <>
+                            <Link
+                              key="admin-link"
+                              to="/admin/consultants"
+                              onClick={toggleSidebar}
+                              className="text-white font-bold hover:text-orange-400 text-lg transition"
+                            >
+                              Client Enquiries
+                            </Link>
+                            <button
+                              key="logout"
+                              onClick={() => {
+                                localStorage.removeItem("adminToken");
+                                setIsAdmin(false);
+                                toggleSidebar();
+                                window.location.reload(); // optional for hard reset
+                              }}
+                              className="mt-2 px-5 py-3 bg-[tomato] text-white rounded-lg font-semibold hover:bg-red-600 transition"
+                            >
+                              Logout
+                            </button>
+                          </>
+                        ) : (
+                          <Link
+                            key={i}
+                            to={path}
+                            onClick={toggleSidebar}
+                            className="text-white font-bold hover:text-orange-400 text-lg transition"
+                          >
+                            {label}
+                          </Link>
+                        );
+                      }
+                      return (
+                        <Link
+                          key={i}
+                          to={path}
+                          onClick={toggleSidebar}
+                          className="text-white font-bold hover:text-orange-400 text-lg transition"
+                        >
+                          {label}
+                        </Link>
+                      );
+                    })}
+                    <Link to="/quote" onClick={toggleSidebar}>
+                      <button className="mt-4 w-full px-5 py-3 text-white font-semibold bg-orange-500 hover:bg-orange-600 rounded-lg transition">
+                        Get A Quote
+                      </button>
+                    </Link>
+                  </nav>
+                </div>
 
-        {/* Nav Links */}
-        <nav className="flex flex-col gap-4">
-          {navLinks.map(({ path, label }, i) => (
-            <Link
-              key={i}
-              to={path}
-              onClick={toggleSidebar}
-              className="text-white font-bold hover:text-orange-400 text-lg transition"
-            >
-              {label}
-            </Link>
-          ))}
+                <div className="text-sm mt-8 border-t pt-4 border-white/20 space-y-2">
+                  <p>📞 <span className="text-[#ffd3a3] font-bold">8053555546</span></p>
+                  <p>📞 <span className="text-[#ffd3a3] font-bold">9996140555</span></p>
+                  <p>📧 <a href="mailto:vertexstudyvisa@gmail.com" className="text-yellow-300 font-semibold">vertexstudyvisa@gmail.com</a></p>
+                </div>
+              </motion.aside>
+            )}
+          </AnimatePresence>
 
-          <Link to="/quote" onClick={toggleSidebar}>
-            <button className="mt-4 w-full px-5 py-3 text-white font-semibold bg-orange-500 hover:bg-orange-600 rounded-lg transition">
-              Get A Quote
-            </button>
-          </Link>
-        </nav>
-      </div>
-
-      {/* Bottom Section: Contact Info */}
-      <div className="text-sm mt-8 border-t pt-4 border-white/20 space-y-2">
-        <p>
-          📞 <span className="text-[#ffd3a3] font-bold">8053555546</span>
-        </p>
-        <p>
-          📞 <span className="text-[#ffd3a3] font-bold">9996140555</span>
-        </p>
-        <p>
-          📧{" "}
-          <a
-            href="mailto:vertexstudyvisa@gmail.com"
-            className="text-yellow-300 font-semibold"
-          >
-            vertexstudyvisa@gmail.com
-          </a>
-        </p>
-      </div>
-    </motion.aside>
-  )}
-</AnimatePresence>
-
-
-          {/* Hero Content */}
+          {/* Hero Section */}
           <motion.section
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -237,28 +255,26 @@ export default function HomePage() {
             <p className="text-white/80 text-lg max-w-2xl mb-10 leading-relaxed font-bold">
               We specialize in <span className="text-orange-400">Study Visas</span>, <span className="text-yellow-300">Tourist Visas</span>, and <span className="text-pink-400">Permanent Residency (PR)</span> guidance.
             </p>
-           <Link to="/consultant">
-  <button className="relative px-8 py-4 text-white font-semibold text-lg rounded-xl overflow-hidden transition duration-300 hover:scale-105 backdrop-blur-md border border-transparent">
-    
-    {/* Gradient border (70% orange) */}
-    <span className="absolute inset-0 rounded-xl p-[2px] bg-[linear-gradient(to_right,_orange_70%,_tomato_85%,_pink)] z-0"></span>
-
-    {/* Inner frosted tomato background with glow */}
-    <span className="absolute inset-[2px] rounded-[0.75rem] bg-[rgba(255,99,71,0.3)] backdrop-blur-md z-10 shadow-[0_0_10px_2px_rgba(255,99,71,0.5)]"></span>
-
-    {/* Text layer */}
-    <span className="relative z-20">GET FREE CONSULTATION</span>
-
-  </button>
-</Link>
-
+            <Link to="/consultant">
+              <button className="relative px-8 py-4 text-white font-semibold text-lg rounded-xl overflow-hidden transition duration-300 hover:scale-105 backdrop-blur-md border border-transparent">
+                <span className="absolute inset-0 rounded-xl p-[2px] bg-[linear-gradient(to_right,_orange_70%,_tomato_85%,_pink)] z-0"></span>
+                <span className="absolute inset-[2px] rounded-[0.75rem] bg-[rgba(255,99,71,0.3)] backdrop-blur-md z-10 shadow-[0_0_10px_2px_rgba(255,99,71,0.5)]"></span>
+                <span className="relative z-20">GET FREE CONSULTATION</span>
+              </button>
+            </Link>
           </motion.section>
         </div>
       </div>
 
-      {/* Dynamic Sections */}
+      {/* Section Stack */}
       {[AboutSection, WhyChooseVertex, ServicesSection, FounderSection, GuidanceSection, CountriesWeServe, TestPreparation, Team, SuccessStory, ConsultationSection].map((Section, i) => (
-        <motion.div key={i} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1 }}>
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: i * 0.1 }}
+        >
           <Section />
         </motion.div>
       ))}
