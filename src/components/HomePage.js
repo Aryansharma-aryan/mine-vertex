@@ -88,41 +88,46 @@ export default function HomePage() {
   </motion.div>
 </AnimatePresence>
 
-        {/* Hero Content Overlay */}
-        <div className="relative z-10 flex flex-col min-h-screen bg-black/20">
-          {/* Top Contact Bar */}
-          <div className="flex items-center justify-between px-4 sm:px-6 py-2 border-b border-gray-700 bg-[#0a0a0a] text-sm sm:text-base">
-            <div className="flex gap-6">
-              <span className="flex items-center gap-2">
-                📞 <strong className="text-[#00c97d]">Phone:</strong>
-                <a href="tel:+918053555546" className="text-[#ffd3a3] font-bold">8053555546</a>
-                <span className="mx-2 text-[#00c97d] font-bold">|</span>
-                <a href="tel:+919996140555" className="text-[#ffd3a3] font-bold">9996140555</a>
-              </span>
-              <span className="flex items-center gap-2">
-                📧 <strong className="text-orange-400">Email:</strong>
-                <a href="mailto:vertexstudyvisa@gmail.com" className="text-yellow-300 font-semibold">vertexstudyvisa@gmail.com</a>
-              </span>
-            </div>
-           <div className="flex gap-4 text-xl">
-  {[
-    { Icon: FaFacebookF, color: "#1877F2" },
-    { Icon: FaTwitter, color: "#1DA1F2" },
-    { Icon: FaInstagram, color: "#E1306C" },
-    { Icon: FaLinkedinIn, color: "#0077B5" },
-  ].map(({ Icon, color }, i) => (
-    <motion.div
-      key={i}
-      whileHover={{ scale: 1.2 }}
-      className="cursor-pointer"
-      style={{ color }}
-    >
-      <Icon />
-    </motion.div>
-  ))}
-</div>
+{/* Hero Content Overlay */}
+<div className="relative z-10 flex flex-col min-h-screen bg-black/20">
+  {/* Top Contact Bar */}
+  <div className="flex flex-wrap items-center justify-between gap-4 px-4 sm:px-6 py-2 border-b border-gray-700 bg-[#0a0a0a] text-sm sm:text-base">
+    {/* Contact Info */}
+    <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 w-full sm:w-auto">
+      <span className="flex flex-wrap items-center gap-2">
+        📞 <strong className="text-[#00c97d]">Phone:</strong>
+        <a href="tel:+918053555546" className="text-[#ffd3a3] font-bold">8053555546</a>
+        <span className="hidden sm:inline mx-2 text-[#00c97d] font-bold">|</span>
+        <a href="tel:+919996140555" className="text-[#ffd3a3] font-bold">9996140555</a>
+      </span>
+      <span className="flex flex-wrap items-center gap-2">
+        📧 <strong className="text-orange-400">Email:</strong>
+        <a href="mailto:vertexstudyvisa@gmail.com" className="text-yellow-300 font-semibold break-all">
+          vertexstudyvisa@gmail.com
+        </a>
+      </span>
+    </div>
 
-          </div>
+    {/* Social Icons */}
+    <div className="flex gap-3 text-xl justify-center sm:justify-end w-full sm:w-auto">
+      {[
+        { Icon: FaFacebookF, color: "#1877F2" },
+        { Icon: FaTwitter, color: "#1DA1F2" },
+        { Icon: FaInstagram, color: "#E1306C" },
+        { Icon: FaLinkedinIn, color: "#0077B5" },
+      ].map(({ Icon, color }, i) => (
+        <motion.div
+          key={i}
+          whileHover={{ scale: 1.2 }}
+          className="cursor-pointer"
+          style={{ color }}
+        >
+          <Icon />
+        </motion.div>
+      ))}
+    </div>
+  </div>
+
 
           {/* Header with Sidebar Toggle */}
           <header className="flex items-center justify-between p-4">
